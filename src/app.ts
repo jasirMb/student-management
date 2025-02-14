@@ -6,6 +6,7 @@ import router from './Routes/common.routes.js';
 
 const app = express();
 connectDB();
+dotenv.config()
 app.use(express.json());
 
 

@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
-    "module": "Node16",          // Keep this for ESM
-    "moduleResolution": "node16",// Required for proper resolution
-    "target": "ESNext",          // Keep this
-    "outDir": "./dist",          // Ensure compiled files go here
-    "rootDir": "./src",          // Source TypeScript files location
-    "strict": true,              // Good practice
-    "esModuleInterop": true,     // Helps with CommonJS module compatibility
-    "skipLibCheck": true,        // Skips type checking for node_modules
-    "resolveJsonModule": true    //
+    "module": "CommonJS",          
+    "moduleResolution": "node16",
+    "target": "ESNext",          
+    "outDir": "./dist",          
+    "rootDir": "./src",          
+    "strict": true,              
+    "esModuleInterop": true,     
+    "skipLibCheck": true,        
+    "resolveJsonModule": true    
   },
   "include": ["src"],
   "exclude": ["node_modules"]

@@ -1,21 +1,24 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, Model } from 'mongoose';
 import bcrypt from 'bcrypt'
+
+interface IUserMethods {
+  comparePassword(candidatePassword: string): Promise<boolean>;
+}
 const ROLES = ['admin', 'student'] as const;
 
 export interface IUser extends Document {
     name: string;
     email: string;
-    department: string;
+    department?: string;
     password: string;
     role: (typeof ROLES)[number];
-    comparePassword(candidatePassword: string): Promise<boolean>; 
 }
 
 const UserSchema = new Schema<IUser>({
     name: { type: String, required: true, trim: true },
     email: { type: String, required: true, unique: true, lowercase: true },
-    department: { type: String, required: true },
-    password: { type: String, required: true, minlength: 6 },
+    department: { type: String },
+    password: { type: String, required: true, minlength: 5 },
     role: { type: String, enum: ROLES, required: true },
 });
 
@@ -40,5 +43,5 @@ UserSchema.pre<IUser>('save', async function (next) {
     return bcrypt.compare(candidatePassword, this.password);
   };
 
-const User = mongoose.model<IUser>('User', UserSchema);
+const User = mongoose.model<IUser, Model<IUser, {}, IUserMethods>>('User', UserSchema);
 export default User;
