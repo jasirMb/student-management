@@ -28,7 +28,7 @@ This is a basic **Student Management System API** built using **ExpressJS** and 
 ## API Documentation
 
 - The API documentation is available on **Postman**.
-- **[Postman Collection URL: YOUR\_POSTMAN\_DOC\_URL]** (Replace with actual URL)
+- **[Postman Collection URL:https://documenter.getpostman.com/view/27549567/2sAYXEEHzw]** 
 
 ## Installation & Setup
 
@@ -42,7 +42,7 @@ This is a basic **Student Management System API** built using **ExpressJS** and 
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/YOUR_GITHUB_REPO.git
+   git clone https://github.com/jasirMb/student-management.git
    cd student-management-api
    ```
 2. Install dependencies:
@@ -137,5 +137,5 @@ This project is licensed under the **MIT License**.
 
 ---
 
-**Author:** YOUR\_NAME
+**Author:** JASIR MB
 
