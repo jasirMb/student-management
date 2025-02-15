@@ -2,11 +2,12 @@
   "name": "student-management-system",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "build": "tsc",
+    "build": "npx tsc",
     "start": "node dist/app.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon dist/app.js\""
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon dist/app.js\"",
+    "prestart":"npm run build"
   },
   "author": "",
   "license": "ISC",
