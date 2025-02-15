@@ -20,23 +20,24 @@ export const addStudent = async (req: Request, res: Response) => {
         });
 
         await newStudent.save();
-        return res.status(201).json({ message: "Student added successfully." });
+        return res.status(201).json({ message: "Student added successfully.",newStudent });
     } catch (error) {
         console.error("Error adding student:", error);
         return res.status(500).json({ message: "Internal server error. Please try again later." });
     }
 };
 
-export const createStudentTask = async (req:Request,res:Response) => {
-    console.log(req.body);
-    const {taskName,description,studentId,dueDate,priority} = req.body
+export const createStudentTask = async (req: Request, res: Response) => {
+    try {
+        const { taskName, description, studentId, dueDate, priority } = req.body;
 
-    // const student = User.findById(studentId)
-    // if(!student) res.status(300).json({message:"no"})
-    // const task = new TaskAssignment({
-    //     taskname,description,studentId,dueDate,priority
-    // })
-    // task.save();
-    // res.status(200).json({message:"dfsd"})
-    
-}
+        const student = await User.findById(studentId);
+        if (!student) return res.status(404).json({ message: "Student not found" });
+
+        const task = await new TaskAssignment({ taskName, description, studentId, dueDate, priority }).save();
+        
+        res.status(201).json({ message: "Task assigned successfully", task });
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error" });
+    }
+};

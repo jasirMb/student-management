@@ -1,21 +1,23 @@
 import { z } from 'zod';
 
 
-const addTaskValidation = {
-    body: z.object({
-      taskName: z.string().min(1, { message: "Task name is required" }),
-      description: z.string().min(1, { message: "Description is required" }),
-      studentId: z.string().min(1, { message: "Student ID is required" }), 
-      dueDate: z.date({ message: "Due date is required" }).refine(date => date > new Date(), {
-        message: "Due date must be a future date",
-      }),
-      status: z.enum(['not-started', 'in-progress', 'completed', 'submitted-late'], {
-        message: "Status must be one of the following: 'not-started', 'in-progress', 'completed', or 'submitted-late'",
-      }),
-      priority: z.enum(['low', 'medium', 'high'], {
-        message: "Priority must be one of the following: 'low', 'medium', 'high'",
-      }),
+ const assignedTasksListValidation = {
+    params: z.object({
+        studentId: z.string().min(1, { message: "Student ID is required" }),
     }),
-  };
+    query: z.object({
+        page: z.number().int().positive().default(1),
+        limit: z.number().int().positive().default(20),
+    }),
+};
 
 
+const updateTaskStatusValidation = z.object({
+    studentId: z.string().min(1, "Student ID is required"),
+    taskId: z.string().min(1, "Task ID is required"),
+    status: z.enum(["pending", "overdue", "completed"]),
+});
+
+export {
+    assignedTasksListValidation, updateTaskStatusValidation
+}

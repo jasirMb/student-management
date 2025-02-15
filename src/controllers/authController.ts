@@ -10,11 +10,9 @@ export const login = async (req: Request, res: Response) => {
   if (!email || !password) {
     return res.status(400).json({ message: "Email and password are required" });
   }
-  console.log(req.body);
  try {
   const existingUser = await User.findOne({ email });
   if (existingUser) {
-    console.log("found", existingUser);
     const isMatch = await existingUser.comparePassword(password as string);
     if (isMatch) {
       const token = jwt.sign(
